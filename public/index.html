@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Video Downloader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pro Video Downloader</h1>
+        <p>Support for 1080p, 2K, and 4K</p>
+        
+        <div class="input-group">
+            <input type="text" id="videoUrl" placeholder="Paste YouTube link here...">
+            <button id="getInfoBtn">Analyze Link</button>
+        </div>
+
+        <!-- This is the loading message -->
+        <div id="loading" style="display: none; color: yellow; margin: 20px;">
+            ⏳ Analyzing video... Please wait...
+        </div>
+
+        <!-- This is where the video details will appear -->
+        <div id="videoDetails" style="display: none;">
+            <div class="card">
+                <img id="thumb" src="" alt="Thumbnail" style="width: 100%; border-radius: 10px;">
+                <h3 id="videoTitle" style="margin: 15px 0;"></h3>
+                <div id="qualityOptions"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
