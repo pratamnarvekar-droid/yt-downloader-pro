@@ -1,24 +1,24 @@
-# Use Node.js 18
-FROM node:18
+FROM node:18-slim
 
-# Install Python and FFmpeg
-RUN apt-get update && apt-get install -y python3 python3-pip ffmpeg
+# Install dependencies, Python, and FFmpeg
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip ffmpeg curl && \
+    apt-get clean
 
-# Install yt-dlp
-RUN pip3 install yt-dlp --break-system-packages
+# Install the latest yt-dlp
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && \
+    chmod a+rx /usr/local/bin/yt-dlp
 
-# Create app directory
 WORKDIR /usr/src/app
 
-# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of your code
 COPY . .
 
-# Expose the port
+# Create temp directory
+RUN mkdir -p server/temp
+
 EXPOSE 3000
 
-# Start the server
 CMD [ "node", "server/server.js" ]
